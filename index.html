@@ -271,7 +271,7 @@ const LVLS = [
       [540, FLOOR-155, 110, 18, 'sand'],
       [740, FLOOR-110, 130, 18, 'sand'],
       [940, FLOOR-190, 110, 18, 'sand'],
-      [1140,FLOOR,150, 130, 18, 'sand'],
+      [1140,FLOOR-150, 130, 18, 'sand'],
       [1350,FLOOR-230, 110, 18, 'sand'],
       [1560,FLOOR-180, 130, 18, 'sand'],
       [1770,FLOOR-265, 110, 18, 'sand'],
@@ -459,12 +459,6 @@ function bgPlayground(wx){
       X.fillStyle=pCols[j%5]; X.save(); X.globalAlpha=0.5;
       X.beginPath(); X.moveTo(px,FLOOR-125); X.lineTo(px+55,FLOOR-42);
       X.lineTo(px+68,FLOOR-42); X.lineTo(px+12,FLOOR-125); X.closePath(); X.fill();
-      X.fillStyle='#795548'; X.fillRect(px+5,FLOOR-125,8,125);
-      X.globalAlpha=1; X.restore();
-    }
-  }
-}
-Path(); X.fill();
       X.fillStyle='#795548'; X.fillRect(px+5,FLOOR-125,8,125);
       X.globalAlpha=1; X.restore();
     }
@@ -850,8 +844,8 @@ function update(dt){
 }
 
 function takeDamage(){
-  if(P.intTimer>0) return;
-  LIVES--; P.intTimer=2.2;
+  if(P.invTimer>0) return;
+  LIVES--; P.invTimer=2.2;
   spawnParts(P_SCRN_X+17,P.y+P.h/2,'#FF1744',16);
   if(LIVES<=0){ STATE='gameover'; goT=0; }
   else{ P.y=FLOOR-P.h-40; P.vy=JFORCE*0.85; worldX=Math.max(0,worldX-160); }
@@ -935,7 +929,7 @@ function drawTitle(dt){
   X.restore();
   // Level dots
   for(var j=0;j<5;j++){
-    X.beginPath(); X.arc(GW/2+(j-2)*26,charY+40,j===0?8:6,0,Math.PI*2);
+    X.beginPath(); X.arc(GW/2+(j-2)*26,charY+40,j===0?8:6,0,Math.PI)2);
     X.fillStyle=j===0?'#FF9800':'rgba(255,255,255,0.3)'; X.fill();
   }
   X.font=Math.floor(GW*0.03)+'px Arial';
@@ -1014,7 +1008,7 @@ function drawLvlWin(dt){
   drawIla(-17,0,true,lvlWinT*3,0); X.restore();
   if(lvlWinT>1.4){
     var isLast=LEVEL>=LVLS.length-1;
-    var btnW=GW*0.72, btnH=54;
+    var btnW=GW*0.72, btnH<54;
     var pulse=0.9+0.1*Math.abs(Math.sin(lvlWinT*5));
     X.save(); X.translate(GW/2,GH*0.82); X.scale(pulse,pulse);
     rrect(-btnW/2,-btnH/2,btnW,btnH,27);
@@ -1052,7 +1046,7 @@ function drawGameOver(dt){
   X.font=Math.floor(GW*0.052)+'px Arial';
   X.fillStyle='#FFB74D'; X.fillText('⭐  Stars: '+STARS,GW/2,GH*0.52);
   if(goT>1.4){
-    var btnW=GW*0.72, btnH<54;
+    var btnW=GW*0.72, btnH=54;
     function goBtn(cy,label,c1,c2){
       var pulse=0.9+0.1*Math.abs(Math.sin(goT*5));
       X.save(); X.translate(GW/2,cy); X.scale(pulse,pulse);
