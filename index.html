@@ -34,8 +34,8 @@
 const C  = document.getElementById('gc');
 const X  = C.getContext('2d');
 
-const GW = Math.min(window.innerWidth, 430);
-const GH = Math.min(window.innerHeight, 820);
+const GW = Math.min(window.innerWidth || document.documentElement.clientWidth || screen.width || 390, 430);
+const GH = Math.min(window.innerHeight || document.documentElement.clientHeight || screen.height || 844, 820);
 C.width  = GW;
 C.height = GH;
 
@@ -929,7 +929,7 @@ function drawTitle(dt){
   X.restore();
   // Level dots
   for(var j=0;j<5;j++){
-    X.beginPath(); X.arc(GW/2+(j-2)*26,charY+40,j===0?8:6,0,Math.PI)2);
+    X.beginPath(); X.arc(GW/2+(j-2)*26,charY+40,j===0?8:6,0,Math.PI*2);
     X.fillStyle=j===0?'#FF9800':'rgba(255,255,255,0.3)'; X.fill();
   }
   X.font=Math.floor(GW*0.03)+'px Arial';
@@ -1008,7 +1008,7 @@ function drawLvlWin(dt){
   drawIla(-17,0,true,lvlWinT*3,0); X.restore();
   if(lvlWinT>1.4){
     var isLast=LEVEL>=LVLS.length-1;
-    var btnW=GW*0.72, btnH<54;
+    var btnW=GW*0.72, btnH=54;
     var pulse=0.9+0.1*Math.abs(Math.sin(lvlWinT*5));
     X.save(); X.translate(GW/2,GH*0.82); X.scale(pulse,pulse);
     rrect(-btnW/2,-btnH/2,btnW,btnH,27);
